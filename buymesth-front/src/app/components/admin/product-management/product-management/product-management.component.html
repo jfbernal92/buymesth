@@ -1,0 +1,177 @@
+<div class="p-grid p-4 p-justify-end">
+    <p-toast [style]="{marginTop: '80px'}"></p-toast>
+    <div class="p-col-12 p-md-3 p-lg-3 p-xl-2">
+        <button class="btn btn-sm btn-warning" (click)="saveChanges()" data-toggle="modal"
+                data-target="#editProductsModal">Save changes?
+        </button>
+    </div>
+    <div class="p-col-12 p-md-3 p-lg-3 p-xl-2">
+        <button class="btn btn-sm btn-primary" (click)="showDialogToAdd()" data-toggle="modal"
+                data-target="#addProductModal"><i class="fa fa-plus"></i> Add
+        </button>
+    </div>
+    <div class="modal fade" id="editProductsModal" tabindex="-1" role="dialog" aria-labelledby="editProductsModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProductsModalLabel">The following products will be updated</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p *ngIf="this.edits.length === 0">Everything is updated <i class="nc-icon nc-satisfied"></i></p>
+                    <div class="p-grid px-3" *ngIf="this.edits.length > 0">
+                        <div class="p-col-12" *ngFor="let p of this.edits">{{p.description}}</div>
+                        <hr>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="left-side">
+                        <button type="button" class="btn btn-danger btn-link" data-dismiss="modal">Cancel</button>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="right-side">
+                        <button type="button" (click)="saveChanges(true)" data-dismiss="modal"
+                                class="btn btn-default btn-link">Continue
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ADD PRODUCT -->
+    <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addProductModalLabel">Add a Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="p-grid">
+                        <div class="p-col-10">
+                            <label>Description:</label>
+                            <textarea [(ngModel)]="newProduct.description" name="description"
+                                      class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="p-grid">
+                        <div class="p-col-6">
+                            <label>Category:</label>
+                            <select class="form-control" [(ngModel)]="newProduct.category">
+                                <option *ngFor="let o of categories">{{o}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="p-grid">
+                        <div class="p-col-6">
+                            <label>Price:</label>
+                            <input [(ngModel)]="newProduct.price" type="number" min="0.1" step="0.1" max="999.99" name="price" class="form-control">
+                        </div>
+                    </div>
+                    <div class="p-grid">
+                        <div class="p-col-6">
+                            <label>Units:</label>
+                            <input [(ngModel)]="newProduct.units" type="number" min="1" step="1" max="1000" name="units" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="left-side">
+                        <button class="btn btn-danger btn-link" (click)="clear()">Clear</button>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="right-side">
+                        <button (click)="save()" data-dismiss="modal"
+                                class="btn btn-default btn-link">Continue
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="p-grid p-4">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="text-center">List of Available Products</h5>
+        </div>
+        <div class="card-body">
+            <p-table [value]="products" dataKey="description" editMode="row">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th *ngFor="let col of cols" [pSortableColumn]="col.field">
+                            {{col.header}}
+                            <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
+                                        ariaLabelDesc="Activate to sort in descending order"
+                                        ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData>
+                    <tr (click)="onRowEditInit(rowData)" (keydown)="isEnterPressed($event, rowData)">
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <textarea pInputTextarea (focusout)="onRowEditInit(rowData)" type="text"
+                                              [(ngModel)]="rowData.description"></textarea>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{rowData.description}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <select pInputText (focusout)="onRowEditInit(rowData)" type="text"
+                                            [(ngModel)]="rowData.category">
+
+                                        <option *ngFor="let o of categories">{{o}}</option>
+
+                                    </select>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{rowData.category}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="number" (focusout)="onRowEditInit(rowData)"
+                                           [(ngModel)]="rowData.price" required>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{rowData.price}} €
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="number" (focusout)="onRowEditInit(rowData)"
+                                           [(ngModel)]="rowData.units" required>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{rowData.units}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="card-footer">
+            <p-paginator [rows]="10" [totalRecords]="response !== undefined ? response.total : 0"
+                         [rowsPerPageOptions]="[5,10,20,30]" (onPageChange)="getPage($event)"></p-paginator>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        .button {
+            background-color: #008CBA;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+        body{
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to buymesth.com!</h1>
+    <h4>We are glad that you have chosen to use our portal to never think about a gift again :)
+        <br><br>Please confirm your account by clicking on the button or by copying the URL in the browser:
+        <br><br>http://localhost:4200/emailconfirmation?token=+token+"&?d="+date
+    </h4>
+    <a class="button"href="http://localhost:4200/emailconfirmation?token=" +token+"&?d=" +date>Confirm your Account</a>
+</body>
+</html>

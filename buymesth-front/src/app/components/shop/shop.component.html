@@ -1,0 +1,104 @@
+<div class="wrapper-main mt-4">
+    <p-toast [style]="{marginTop: '80px'}"></p-toast>
+    <div class="p-grid">
+        <div class="p-col-12 p-md-7">
+            <div class="p-grid">
+                <div class="p-col-9">
+                    <hr style="border-color:#617c8a!important;">
+                    <h6 class="btn btn-link" style="cursor: default;font-size:1.25em"><i class="nc-icon nc-bullet-list-67 mr-2"></i>&nbsp;Filter by category</h6>
+                    <hr style="border-color:#617c8a!important;">
+                </div>
+                <div class="p-col-6">
+                    <div class="p-col-12 mb-2">
+                        <h6>Technology</h6>
+                        <p-inputSwitch (onChange)="changeSwitch($event, 'TECHNOLOGY')"></p-inputSwitch>
+                        <i class="ml-2 nc-icon nc-tv-2" style="font-size: 1.5em"></i>
+                    </div>
+                    <div class="p-col-12 mb-2">
+                        <h6>Home</h6>
+                        <p-inputSwitch (onChange)="changeSwitch($event, 'HOME')"></p-inputSwitch>
+                        <i class="ml-2 nc-icon nc-istanbul" style="font-size: 1.5em"></i>
+                    </div>
+                    <div class="p-col-12 mb-2">
+                        <h6>Kitchen</h6>
+                        <p-inputSwitch (onChange)="changeSwitch($event, 'KITCHEN')"></p-inputSwitch>
+                        <i class="ml-2 nc-icon nc-book-bookmark" style="font-size: 1.5em"></i>
+                    </div>
+                </div>
+
+                <div class="p-col-6">
+                    <div class="p-col-12 mb-2">
+                        <h6>Other</h6>
+                        <p-inputSwitch (onChange)="changeSwitch($event, 'OTHER')"></p-inputSwitch>
+                        <i class="ml-2 nc-icon nc-planet" style="font-size: 1.5em"></i>
+                    </div>
+                    <div class="p-col-12 mb-2">
+                        <h6>Stationery</h6>
+                        <p-inputSwitch (onChange)="changeSwitch($event, 'STATIONERY')"></p-inputSwitch>
+                        <i class="ml-2 nc-icon nc-palette" style="font-size: 1.5em"></i>
+                    </div>
+                    <div class="p-col-12 mb-2">
+                        <h6>Outdoor</h6>
+                        <p-inputSwitch (onChange)="changeSwitch($event, 'OUTDOOR')"></p-inputSwitch>
+                        <i class="ml-2 nc-icon nc-sun-fog-29" style="font-size: 1.5em"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-col-12 p-md-5" style="padding: 0.5em !important;">
+            <div class="p-grid">
+                <div class="p-col-9 mb-3">
+                    <hr style="border-color:#617c8a!important;">
+                    <h6 class="btn btn-link" style="cursor: default;font-size:1.25em"><i class="nc-icon nc-settings mr-2"></i>&nbsp;Choose price range</h6>
+                    <hr style="border-color:#617c8a!important;">
+                </div>
+                <div class="p-col-12 p-sm-10 p-md-9 p-lg-7 mb-3" *ngIf="user">
+                    <h6>Range: {{rangeValues[0] + '€ - ' + rangeValues[1] + '€'}}</h6>
+                    <p-slider [(ngModel)]="rangeValues" [min]="0.10" [step]="0.01" [max]="user.userDetail.bank" [range]="true"></p-slider>
+                </div>
+                <div class="p-col-12 mt-4 mb-3">
+                    <i class="mr-2 nc-icon nc-bag-16" style="font-size: 1.5em" data-toggle="tooltip" data-placement="left" title="I want to know what i'm buying"></i>
+                    <p-inputSwitch [(ngModel)]="visible"></p-inputSwitch>
+                    <i class="ml-2 nc-icon nc-box-2" style="font-size: 1.5em" data-toggle="tooltip" data-html="true" data-placement="right" title="Keep the hype until package arrive home! <i class=&#34;mr-2 nc-icon nc-satisfied&#34;></i>"></i>
+                </div>
+
+                <div class="p-col-10 mt-2 text-center">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#buyModal"><i
+                            class="nc-icon nc-cart-simple"
+                            style="font-size: 1.25em"></i>&nbsp;Buy me
+                        something!
+                        <p-progressSpinner *ngIf="submitted" class="ml-3"
+                                           [style]="{width: '12px', height: '12px'}"
+                                           strokeWidth="9" animationDuration="5s"></p-progressSpinner>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="buyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header no-border-header">
+                <button type="button" class="close mt-2" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title mt-2" id="buyModalLabel">You are about to be a little happier!</h5>
+            </div>
+            <div class="modal-footer">
+                <div class="left-side">
+                    <button type="button" class="btn btn-default btn-link" data-dismiss="modal">Not ready yet</button>
+                </div>
+                <div class="divider"></div>
+                <div class="right-side">
+                    <button type="button" (click)="buy()" class="btn btn-danger btn-link" data-dismiss="modal">Do it!
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+::ng-deep body {
+    background: none !important;
+}
+
+::ng-deep .presentation-title {
+    font-size: 7.5em !important;;
+    font-weight: 700 !important;;
+    margin: 0 !important;;
+    color: #FFFFFF !important;;
+    background: #fbf8ec !important;;
+    background: -moz-linear-gradient(top, #FFFFFF 35%, #4e6773 100%) !important;;
+    background: -webkit-linear-gradient(top, #FFFFFF 35%, #4e6773 100%) !important;;
+    background: -ms-linear-gradient(top, #FFFFFF 35%, #4e6773 100%) !important;;
+    background: linear-gradient(to top, #D0FCF6 1%, #4e6773 100%) !important;;
+    -webkit-background-clip: text !important;;
+    -webkit-text-fill-color: transparent !important;
+}
+
+

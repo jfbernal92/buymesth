@@ -1,0 +1,42 @@
+<div class="sidebar" data-color="white" data-active-color="danger">
+    <!--
+      Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+  -->
+    <div class="logo text-center">
+        <a href="#" class="simple-text logo-normal">ADMIN PANEL </a>
+    </div>
+    <div class="sidebar-wrapper overflow-all-hidden">
+        <ul class="nav">
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}">
+                <a routerLink="/admin">
+                    <i class="nc-icon nc-chart-pie-36"></i>
+                    <p>Stats</p>
+                </a>
+            </li>
+            <li routerLinkActive="active">
+                <a routerLink="users">
+                    <i class="pi pi-users"></i>
+                    <p>User Management</p>
+                </a>
+            </li>
+            <li routerLinkActive="active">
+                <a routerLink="operations">
+                    <i class="nc-icon nc-money-coins"></i>
+                    <p>Operations Managemet</p>
+                </a>
+            </li>
+            <li routerLinkActive="active">
+                <a routerLink="products">
+                    <i class="nc-icon nc-paper"></i>
+                    <p>Products</p>
+                </a>
+            </li>
+            <li>
+                <a href="/profile">
+                    <i class="nc-icon nc-single-02"></i>
+                    <p>User Profile</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

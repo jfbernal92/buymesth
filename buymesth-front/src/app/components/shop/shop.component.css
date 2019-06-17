@@ -1,0 +1,27 @@
+::ng-deep .ui-inputswitch.ui-inputswitch-checked .ui-inputswitch-slider {
+    background: #51cbce !important;
+}
+
+::ng-deep .ui-inputswitch .ui-inputswitch-slider {
+    transition: background-color 0.2s;
+    border-radius: 30px;
+    background: #e2e2e2 !important;
+}
+
+::ng-deep .ui-inputswitch .ui-inputswitch-slider:before {
+    background-color: #FFF !important;
+    height: 1.25em;
+    width: 1.25em;
+    left: 0.25em;
+    bottom: 0.25em;
+    border-radius: 50%;
+    transition: 0.2s;
+}
+
+::ng-deep .ui-slider .ui-slider-range {
+    background-color: #51cbce !important;
+}
+
+::ng-deep .ui-slider:not(.ui-state-disabled) .ui-slider-handle:hover {
+    border: 2px solid #51cbce !important;
+}

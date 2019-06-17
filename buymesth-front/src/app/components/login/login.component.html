@@ -1,0 +1,61 @@
+<div class="wrapper-main mt-4">
+    <p-toast [style]="{marginTop: '80px'}"></p-toast>
+    <div class="p-grid p-justify-center">
+        <div class="p-col-12 p-sm-12 p-md-8 p-lg-6 p-xl-4">
+            <div class="card">
+                <div class="card-header bg-success" style="background-color: #44c47d !important">
+                    <h3 class="text-center text-white">Log In</h3>
+                </div>
+                <div class="card-body ">
+                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                        <div class="p-grid p-dir-col p-4">
+                            <div class="p-col-12">
+                                <label>Email</label>
+                                <div class="input-group form-group">
+                                    <span class="input-group-addon">
+                                            <i class="nc-icon nc-email-85"></i>
+                                        </span>
+                                    <input type="email" class="form-control" formControlName="email" name="email" placeholder="Introduce your email">
+                                </div>
+                            </div>
+                            <div class="p-col-12">
+                                <label>Password</label>
+                                <div class="input-group form-group">
+                                    <span class="input-group-addon">
+                                            <i class="nc-icon nc-key-25"></i>
+                                        </span>
+                                    <input type="password" class="form-control" formControlName="password" placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="p-col-align-end">
+                                <div class="forgot">
+                                    <a [routerLink]="['/passwordrecovery']" class="btn btn-link btn-success">Forgot
+                                        password?</a>
+                                </div>
+                            </div>
+                            <div class="p-col-align-center">
+                                <div class="update ml-auto mr-auto mt-2">
+                                    <button class="btn btn-round btn-outline-success btn-lg" type="submit">Log in
+                                        <p-progressSpinner *ngIf="submitted" class="ml-3"
+                                                           [style]="{width: '12px', height: '12px'}"
+                                                           strokeWidth="9" animationDuration="5s"></p-progressSpinner>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="p-grid p-justify-center">
+        <div class="p-col-12 p-sm-12 p-md-8 p-lg-6 p-xl-4" style="z-index: 100">
+            <hr/>
+            <p>Don't have an account?</p>
+            <button routerLink="/signup" class="btn btn-round btn-success">Sign Up now!</button>
+        </div>
+    </div>
+
+    <!--  <i class="nc-icon nc-cart-simple" style="font-size: 300px"></i>-->
+</div>

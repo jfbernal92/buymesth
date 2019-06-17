@@ -1,0 +1,64 @@
+body {
+    background-color: #f4f3ef !important;
+}
+
+.card-stats .card-body .numbers {
+    text-align: right;
+    font-size: 2em;
+}
+
+.card .numbers {
+    font-size: 2em;
+}
+
+.card-stats .card-body .numbers .card-category {
+    color: #9A9A9A;
+    font-size: 16px;
+    line-height: 1.4em;
+}
+
+.card-stats .card-body .numbers p {
+    margin-bottom: 0;
+}
+.card-category {
+    font-size: 1em;
+}
+.category, .card-category {
+    text-transform: capitalize;
+    font-weight: 400;
+    color: #9A9A9A;
+    font-size: 0.7142em;
+}
+
+.card-stats .card-body .numbers p {
+    margin-bottom: 0;
+}
+.card-stats .card-body .numbers .card-title {
+    color: black;
+    font-size: 30px;
+    font-weight: bolder;
+}
+.card-title {
+    margin-bottom: .75rem;
+}
+.card-stats .icon-big {
+    font-size: 3em;
+    min-height: 64px;
+}
+.card-stats .icon-big i {
+    line-height: 59px;
+}
+.card-stats .card-footer {
+    padding: 0px 15px 15px;
+}
+hr{
+    margin-top: 0;
+}
+
+.card .card-header{
+    border-radius: 12px 12px 0 0;
+}
+
+::ng-deep .card-header {
+    background-color: #ffe4c4 !important;
+}

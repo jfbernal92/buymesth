@@ -1,0 +1,16 @@
+::ng-deep body {
+    background-color: #f4f3ef !important;
+}
+
+th, tr {
+    cursor: pointer;
+}
+
+th:hover {
+    background-color: #f4f4f4;
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+    background-color: #51cbce;
+    border-color: #51cbce;
+}

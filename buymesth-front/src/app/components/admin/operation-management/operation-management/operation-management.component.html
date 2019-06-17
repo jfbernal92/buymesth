@@ -1,0 +1,97 @@
+<div class="p-grid">
+    <p-toast [style]="{marginTop: '80px'}"></p-toast>
+    <div class="p-col-12">
+        <div class="card ">
+            <div class="card-header ">
+                <h5 class="card-title">Operation Stats</h5>
+                <p class="card-category">24 Hours performance</p>
+            </div>
+            <div class="card-body ">
+                <p-chart type="bar" [data]="operationsByType" width="100%" height="350px" [responsive]="true"></p-chart>
+            </div>
+            <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                    <i class="fa fa-refresh" (click)="getOperationCountByType()" style="cursor: pointer"></i> Last
+                    Update: {{date | date: 'shortTime'}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="p-col-12">
+        <div class="card ">
+            <div class="card-header ">
+                <h5 class="card-title">Operation List</h5>
+                <div class="card-category p-grid p-justify-start">
+                    <div class="p-col-6 p-lg-2 p-xl-2">
+                        <p-checkbox name="group1" value="DEPOSIT" label="Deposits" [(ngModel)]="selectedType"
+                                    inputId="DEPOSIT"></p-checkbox>
+                    </div>
+                    <div class="p-col-6 p-lg-2 p-xl-2">
+                        <p-checkbox name="group1" value="BUY" label="Buys" [(ngModel)]="selectedType"
+                                    inputId="BUY"></p-checkbox>
+                    </div>
+                    <div class="p-col-6 p-lg-2 p-xl-2">
+                        <p-checkbox name="group2" value="PENDING" label="Pending" [(ngModel)]="selectedStatus"
+                                    inputId="PENDING"></p-checkbox>
+                    </div>
+                    <div class="p-col-6 p-lg-2 p-xl-2">
+                        <p-checkbox name="group2" value="TRANSIT" label="Transit" [(ngModel)]="selectedStatus"
+                                    inputId="TRANSIT"></p-checkbox>
+                    </div>
+                    <div class="p-col-6 p-lg-6 p-xl-2">
+                        <p-checkbox name="group2" value="COMPLETED" label="Completed" [(ngModel)]="selectedStatus"
+                                    inputId="COMPLETED"></p-checkbox>
+                    </div>
+                </div>
+                <div class="p-grid mt-2">
+                    <div class="p-col-12">
+                        <button class="btn btn-sm btn-primary" (click)="search()"><i class="nc-icon nc-zoom-split"></i>
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <ng-container *ngFor="let operation of operations">
+                    <div class="p-grid p-justify-around pl-4">
+                        <div class="p-col-12 p-md-6">
+                            <i class="nc-icon"
+                               [ngClass]="operation.type === 'BUY'?'nc-cart-simple':'nc-money-coins'"></i> {{operation.amount}}
+                            €
+                        </div>
+                        <div class="p-col-12 p-md-6" *ngIf="operation.type === 'DEPOSIT'">
+                            Deposit
+                        </div>
+                        <div class="p-col-12 p-md-6" *ngIf="operation.type === 'BUY'">
+                            {{operation.product.description}}</div>
+                        <div class="p-col-12 p-md-6">
+                            {{operation.date | date : 'short'}}
+                        </div>
+                        <div class="p-col-12 p-md-6">
+                            <span class="label" [ngClass]="getColorLabel(operation.status)"
+                                  [ngStyle]="{'cursor': operation.status !== 'COMPLETED' ? 'pointer' : 'default'}"
+                                  (click)="showDialog(operation)">{{operation.status}}</span>
+                        </div>
+
+                    </div>
+                    <hr>
+                </ng-container>
+            </div>
+            <div class="card-footer">
+                <p-paginator [rows]="10" [totalRecords]="response !== undefined ? response.total : 0"
+                             [rowsPerPageOptions]="[5,10,20,30]" (onPageChange)="getPage($event)"></p-paginator>
+            </div>
+        </div>
+    </div>
+    <p-dialog [(visible)]="display" [modal]="true" [style]="{width: '225px'}" [minY]="170"
+              [baseZIndex]="10000" *ngIf="selectedOperation">
+        <p-dropdown [options]="availableStatus" [(ngModel)]="newStatus"></p-dropdown>
+        <p-footer>
+            <button type="button" class="btn btn-sm btn-success" (click)="changeStatus()">Yes <i
+                    class="pi pi-check"></i></button>
+            <button type="button" class="btn btn-sm btn-default" (click)="display=false">No <i class="pi pi-close"></i>
+            </button>
+        </p-footer>
+    </p-dialog>
+</div>

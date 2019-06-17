@@ -1,0 +1,301 @@
+<div class="wrapper-main mt-4">
+
+    <div class="p-grid p-justify-around" *ngIf="user">
+        <p-toast [style]="{marginTop: '80px'}"></p-toast>
+        <div *ngIf="user.userDetail === null" class="p-col-12">
+            <p-steps [model]="items" [(activeIndex)]="activeIndex" [readonly]="true"></p-steps>
+            <!-- nombre apellidoX2 pais -->
+            <p-toast [style]="{marginTop: '80px'}"></p-toast>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" [ngSwitch]="activeIndex">
+
+                <div *ngSwitchCase="0" class="ui-g">
+                    <div class="ui-g-12 ui-lg-4 ui-lg-offset-4 ui-md-6 ui-md-offset-3">
+                        <input pInputText type="text" class="form-control" formControlName="name" placeholder="Name" />
+                    </div>
+                    <div class="ui-g-12 ui-lg-4 ui-lg-offset-4 ui-md-6 ui-md-offset-3">
+                        <input pInputText type="text" class="form-control" formControlName="firstSurname" placeholder="First Surname" />
+                    </div>
+                    <div class="ui-g-12 ui-lg-4 ui-lg-offset-4 ui-md-6 ui-md-offset-3">
+                        <input pInputText type="text" class="form-control" formControlName="secondSurname" placeholder="Second Surname" />
+                    </div>
+                </div>
+                <div *ngSwitchCase="1" class="ui-g">
+                    <div class="ui-g-4 ui-g-offset-2">
+                        <input pInputText type="text" class="form-control" formControlName="country" placeholder="Country" />
+                    </div>
+                    <div class="ui-g-4">
+                        <input pInputText type="text" class="form-control" formControlName="state" placeholder="State" />
+                    </div>
+                    <div class="ui-g-4 ui-g-offset-2">
+                        <input pInputText type="text" class="form-control" formControlName="region" placeholder="Region" />
+                    </div>
+                    <div class="ui-g-4  ">
+                        <input pInputText type="text" class="form-control" formControlName="province" placeholder="Province" />
+                    </div>
+                    <div class="ui-g-3 ui-g-offset-2">
+                        <input pInputText type="text" class="form-control" formControlName="street" placeholder="Street" />
+                    </div>
+                    <div class="ui-g-2">
+                        <input pInputText type="text" class="form-control" formControlName="postalCode" placeholder="Postal Code" />
+                    </div>
+                    <div class="ui-g-2">
+                        <input pInputText type="number" class="form-control" formControlName="number" placeholder="Number" />
+                    </div>
+                    <div class="ui-g-1">
+                        <input pInputText type="text" class="form-control" formControlName="door" placeholder="Door" />
+                    </div>
+                </div>
+                <div *ngSwitchCase="2" class="ui-g">
+                    <ul>
+                        <li>
+                            Name: {{form.controls.name.value}}
+                        </li>
+                        <li>
+                            First Surname: {{form.controls.firstSurname.value}}
+                        </li>
+                        <li>
+                            Second Surname: {{form.controls.secondSurname.value}}
+                        </li>
+                        <li>
+                            Country: {{form.controls.country.value}}
+                        </li>
+                        <li>
+                            Region: {{form.controls.region.value}}
+                        </li>
+                        <li>
+                            State: {{form.controls.state.value}}
+                        </li>
+                        <li>
+                            Province: {{form.controls.province.value}}
+                        </li>
+                        <li>
+                            Postal Code: {{form.controls.postalCode.value}}
+                        </li>
+                        <li>
+                            Number: {{form.controls.number.value}}
+                        </li>
+                        <li>
+                            Door: {{form.controls.door.value}}
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="ui-g" *ngIf="activeIndex <2">
+                    <div class="ui-g-2 ui-g-offset-4">
+                        <div *ngIf="activeIndex > 0" class="btn btn-info btn-lg" (click)="previous()">Previous</div>
+                    </div>
+                    <div class="ui-g-2 ">
+                        <div *ngIf="activeIndex < 2" class="btn btn-success btn-lg" (click)="next()">Next</div>
+                    </div>
+                </div>
+
+                <div class="ui-g" *ngIf="activeIndex == 2">
+                    <div class="ui-g-2 ui-g-offset-4">
+                        <div class="btn btn-info btn-lg" (click)="previous()">Previous</div>
+                    </div>
+                    <div class="ui-g-2">
+                        <button type="submit" class="btn btn-default btn-lg" [disabled]="!form.valid">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div *ngIf="user.userDetail !== null" class="p-col-12 p-xl-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Your Personal Information</h5>
+                </div>
+                <div class="card-body">
+                    <h6>{{user.userDetail.name + ' ' + user.userDetail.firstSurname + ' ' + user.userDetail.secondSurname}}</h6>
+                    <hr>
+                    <h6>{{user.userDetail.country + (user.userDetail.state ? ' ' + user.userDetail.state : '')}}</h6>
+                    <hr>
+                    <h6>{{user.userDetail.province + ' (' + (user.userDetail.region ? user.userDetail.region + ', ' : '') + user.userDetail.postalCode + ' )'}}</h6>
+                    <hr>
+                    <h6>{{user.userDetail.street + ', ' + user.userDetail.number + ' ' + user.userDetail.door}}</h6>
+                    <hr>
+                </div>
+                <div class="card-footer text-center p-grid p-justify-center">
+                    <div class="p-col-12 p-md-5 p-lg-6">
+                        <button type="button" data-toggle="modal" data-target="#editProfileModal" class="btn btn-warning btn-outline-warning btn-round" (click)="form.patchValue(user.userDetail);">Edit Profile
+                        </button>
+                    </div>
+                    <div class="p-col-12 p-md-5 p-lg-6">
+                        <a routerLink="/admin" *ngIf="hasAdminRole()" class="btn btn-outline-warning btn-round"><i
+                                class="nc-icon nc-layout-11"></i> Go to Admin Page</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="user.userDetail !== null" class="p-col-12 p-xl-5">
+            <div class="nav-tabs-navigation">
+                <div class="nav-tabs-wrapper">
+                    <ul id="tabs" class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" (click)="getHistory()" role="tab"><i
+                                    class="fa fa-calendar"></i> History</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" (click)="getOrders()" role="tab"><i
+                                    class="nc-icon nc-cart-simple"></i> Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" (click)="getDeposits()" role="tab"><i
+                                    class="nc-icon nc-credit-card"></i> Deposits</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="my-tab-content" class="tab-content text-center">
+                <div class="tab-pane" role="tabpanel" [ngClass]="activeIndex===0 ? 'active' : ''">
+                    <p *ngIf="response && response.total === 0">You haven't any deposit or buy to show.</p>
+                    <ng-container *ngFor="let o of operations">
+                        <div class="p-grid">
+                            <div class="col-2">
+                                <h6 [ngClass]="getColorType(o.type)">{{o.type === 'BUY' ? '-' : '+'}}{{o.amount}}€</h6>
+                            </div>
+                            <div class="col-5">
+                                {{o.type === 'DEPOSIT' ? 'Deposit' : ''}} {{o.type === 'BUY' && o.visible ? o.product.description : 'Wait until product arrive'}}
+                                <i class="nc-icon nc-satisfied" *ngIf="!o.visible && o.status !== 'COMPLETED'"></i>
+                            </div>
+                            <div class="col-3">
+                                {{o.date | date: 'short'}}
+                            </div>
+                            <div class="col-1">
+                                <span class="label" [ngClass]="getColorLabel(o.status)">{{o.status}}</span>
+                            </div>
+                        </div>
+                        <hr>
+                    </ng-container>
+                    <p-paginator [rows]="10" [totalRecords]="response !== undefined ? response.total : 0" [rowsPerPageOptions]="[5,10,20,30]" (onPageChange)="getHistory($event)"></p-paginator>
+                </div>
+                <div class="tab-pane" role="tabpanel" [ngClass]="activeIndex===1 ? 'active' : ''">
+                    <p *ngIf="response && response.total === 0">You have not bought anything yet!</p>
+                    <ng-container *ngFor="let o of operations">
+                        <div class="p-grid">
+                            <div class="col-2">
+                                <h6 [ngClass]="getColorType(o.type)">-{{o.amount}}€</h6>
+                            </div>
+                            <div class="col-5">
+                                {{o.type === 'BUY' && o.visible ? o.product.description : 'Wait until product arrive'}}
+                                <i class="nc-icon nc-satisfied" *ngIf="!o.visible && o.status !== 'COMPLETED'"></i>
+                            </div>
+                            <div class="col-3">
+                                {{o.date | date: 'short'}}
+                            </div>
+                            <div class="col-1">
+                                <span class="label" [ngClass]="getColorLabel(o.status)">{{o.status}}</span>
+                            </div>
+                        </div>
+                        <hr>
+                    </ng-container>
+                    <p-paginator [rows]="10" [totalRecords]="response !== undefined ? response.total : 0" [rowsPerPageOptions]="[5,10,20,30]" (onPageChange)="getOrders($event)"></p-paginator>
+                </div>
+                <div class="tab-pane" role="tabpanel" [ngClass]="activeIndex===2 ? 'active' : ''">
+                    <p *ngIf="response && response.total === 0"> You haven't done any deposit yet.</p>
+                    <ng-container *ngFor="let o of operations">
+                        <div class="p-grid">
+                            <div class="col-3">
+                                <h6 [ngClass]="getColorType(o.type)">+{{o.amount}}€</h6>
+                            </div>
+
+                            <div class="col-5">
+                                {{o.date | date: 'short'}}
+                            </div>
+                            <div class="col-3">
+                                <span class="label" [ngClass]="getColorLabel(o.status)">{{o.status}}</span>
+                            </div>
+                        </div>
+                        <hr>
+                    </ng-container>
+                    <p-paginator [rows]="10" [totalRecords]="response !== undefined ? response.total : 0" [rowsPerPageOptions]="[5,10,20,30]" (onPageChange)="getDeposits($event)"></p-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProfileModalLabel">Edit Your Profile</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group" [ngClass]="form.controls.country.invalid ? 'has-danger' : 'has-success'">
+                                    <label>Country</label>
+                                    <input type="text" class="form-control" formControlName="country" name="country">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>State</label>
+                                    <input type="text" class="form-control form-control-danger" formControlName="state">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group" [ngClass]="form.controls.region.invalid ? 'has-danger' : 'has-success'">
+                                    <label>Region</label>
+                                    <input type="text" class="form-control" formControlName="region">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Province / City</label>
+                                    <input type="text" class="form-control" formControlName="province">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-7">
+                                <div class="form-group" [ngClass]="form.controls.street.invalid ? 'has-danger' : 'has-success'">
+                                    <label>Street</label>
+                                    <input type="text" class="form-control" formControlName="street">
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="form-group" [ngClass]="form.controls.postalCode.invalid ? 'has-danger' : 'has-success'">
+                                    <label>Postal Code</label>
+                                    <input type="text" class="form-control" formControlName="postalCode">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label>Number</label>
+                                    <input type="text" class="form-control" formControlName="number">
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label>Door</label>
+                                    <input type="text" class="form-control" formControlName="door">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="left-side">
+                        <button type="button" class="btn btn-danger btn-link" data-dismiss="modal">Cancel</button>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="right-side">
+                        <button type="button" (click)="onSubmit()" data-dismiss="modal" class="btn btn-default btn-link" [disabled]="!form.valid">Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

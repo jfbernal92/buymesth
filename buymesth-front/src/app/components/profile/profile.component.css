@@ -1,0 +1,22 @@
+.ui-steps .ui-steps-item.ui-state-highlight .ui-steps-number {
+    background-color: #66615B !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    border-color: #66615B !important;
+}
+.ui-steps ul {
+    display: flex !important;
+    justify-content: space-around !important;
+}
+.ui-steps .ui-steps-item {
+    clear: both !important;
+    box-sizing: border-box !important;
+    cursor: pointer !important;
+}
+
+.card-header {
+    background-color: #ffe4c4 !important;
+}
+
+.nav-item {
+    cursor: pointer !important;
+}

@@ -1,0 +1,148 @@
+<div class="row">
+    <p-toast [style]="{marginTop: '80px'}"></p-toast>
+    <div class="col-sm-12 col-xl-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">User List</h5>
+                <div class="legend">
+                    <i style="cursor: pointer;" (click)="order(ENABLED)" class="fa fa-circle text-warning"></i> Not
+                    enabled yet
+                    <i style="cursor: pointer;" (click)="order(LOCKED)" class="fa fa-circle text-danger"></i> Locked
+                    <i class="fa fa-circle text-info"></i> Admin
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover" *ngIf="response !== undefined">
+                        <thead class="text-primary">
+                        <th (click)="order(NAME)">Name</th>
+                        <th (click)="order(EMAIL)">Email</th>
+                        <th (click)="order(SIGNUP_DATE)">Sign up Date</th>
+                        <th (click)="order(BANK)" class="text-right">Bank</th>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let user of response.result; let i = index" (click)="viewRow(i, $event)"
+                            [class.text-warning]="!user.enabled" [class.text-danger]="user.locked"
+                            [class.text-info]="user.roles.length > 1" [class.bg-hover]="i==0" [id]="i==0 ? 'first' :''">
+                            <td>{{user.enabled ? user.userDetail.name : ''}} {{user.enabled ? user.userDetail.firstSurname : ''}} {{user.enabled ? user.userDetail.secondSurname : ''}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.signupDate | date: 'dd/MM/yyyy'}}</td>
+                            <td class="text-right">${{user.enabled ? user.userDetail.bank : 0}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+                <hr>
+                <div class="stats">
+                    <p-paginator [rows]="10" [totalRecords]="response !== undefined ? response.total : 0"
+                                 [rowsPerPageOptions]="[5,10,20,30]" (onPageChange)="getPage($event)"></p-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-xl-4">
+        <div class="card card-user" style="z-index: unset" *ngIf="activeUser">
+            <div class="card-header">
+                <h5 class="card-title">Edit Profile <i class="pi pi-trash text-danger" style="cursor: pointer"
+                                                       data-toggle="modal"
+                                                       data-target="#deleteUserModal"></i></h5>
+                <h6>{{activeUser.enabled ? activeUser.userDetail.name + ' ' + activeUser.userDetail.firstSurname + ' ' + activeUser.userDetail.secondSurname : 'PROFILE NOT COMPLETED'}}</h6>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group"
+                                 [ngClass]="form.controls.country.invalid ? 'has-danger' : 'has-success'">
+                                <label>Country</label>
+                                <input type="text" class="form-control" formControlName="country" name="country">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>State</label>
+                                <input type="text" class="form-control form-control-danger" formControlName="state">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group"
+                                 [ngClass]="form.controls.region.invalid ? 'has-danger' : 'has-success'">
+                                <label>Region</label>
+                                <input type="text" class="form-control" formControlName="region">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Province / City</label>
+                                <input type="text" class="form-control" formControlName="province">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="form-group"
+                                 [ngClass]="form.controls.street.invalid ? 'has-danger' : 'has-success'">
+                                <label>Street</label>
+                                <input type="text" class="form-control" formControlName="street">
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-group"
+                                 [ngClass]="form.controls.postalCode.invalid ? 'has-danger' : 'has-success'">
+                                <label>Postal Code</label>
+                                <input type="text" class="form-control" formControlName="postalCode">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label>Number</label>
+                                <input type="text" class="form-control" formControlName="number">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label>Door</label>
+                                <input type="text" class="form-control" formControlName="door">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="update ml-auto mr-auto">
+                            <button type="submit" class="btn btn-primary btn-round" [disabled]="!form.valid">Update
+                                Profile
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL DELETE -->
+    <div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>Your are about to delete this user and all his operations...</p>
+                </div>
+                <div class="modal-footer">
+                    <div class="left-side">
+                        <button type="button" class="btn btn-danger btn-link" data-dismiss="modal">Cancel</button>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="right-side">
+                        <button type="button" (click)="delete()" data-dismiss="modal"
+                                class="btn btn-default btn-link">Continue
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

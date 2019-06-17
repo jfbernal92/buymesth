@@ -1,0 +1,7 @@
+.card-header {
+    background-color: #ffe4c4 !important;
+}
+
+::ng-deep body {
+    background-color: #f4f3ef !important;
+}

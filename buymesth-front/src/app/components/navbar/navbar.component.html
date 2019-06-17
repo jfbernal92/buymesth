@@ -1,0 +1,80 @@
+<nav *ngIf="!isInAdminPanel()" class="navbar fixed-top navbar-expand-lg {{bg_color}}">
+    <p-toast [style]="{marginTop: '80px'}"></p-toast>
+    <div class="container-fluid">
+        <div class="navbar-translate">
+            <button class="navbar-toggler navbar-toggler-right navbar-burger custom-toggler" type="button"
+                    data-toggle="collapse" data-target="#navbarToggler" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-bar"></span>
+                <span class="navbar-toggler-bar"></span>
+                <span class="navbar-toggler-bar"></span>
+            </button>
+            <a class="navbar-brand" routerLink="home">buymesth</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarToggler">
+            <ul class="navbar-nav ml-auto" routerLinkActive="active">
+                <li *ngIf="isLogged()" class="nav-item">
+                    <a class="nav-link" routerLink="profile"><i class="nc-icon nc-circle-10"
+                                                                style="font-size: 1.75em;"></i> Profile</a>
+                </li>
+                <li *ngIf="isLogged()" class="nav-item">
+                    <a class="nav-link" routerLink="shop"><i class="nc-icon nc-shop" style="font-size: 1.75em;"></i>
+                        Shop</a>
+                </li>
+                <li *ngIf="!isLogged()" class="nav-item">
+                    <a class="nav-link" routerLink="login"><i class="pi pi-sign-in" style="font-size: 2em;"></i> Log In</a>
+                </li>
+                <li *ngIf="!isLogged()" class="nav-item">
+                    <a class="nav-link" routerLink="signup"><i class="nc-icon nc-badge" style="font-size: 1.75em;"></i>
+                        Sign Up</a>
+                </li>
+                <li *ngIf="isLogged() && userName !== ''" class="nav-item">
+                    <a class="nav-link bg-transparent text-white border-0" data-toggle="modal"
+                       data-target="#depositModal"><i
+                            class="nc-icon nc-credit-card"
+                            style="font-size: 1.75em"></i> {{bank}} €</a>
+
+                </li>
+                <li *ngIf="isLogged()" class="nav-item">
+                    <a class="nav-link" style="cursor: pointer;" (click)="logOut()"><i class="nc-icon nc-button-power"
+                                                                                       style="font-size: 1.75em;"></i>
+                        Log out</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<!-- Modal -->
+<div class="modal fade" id="depositModal" tabindex="-1" role="dialog" aria-labelledby="depositModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header no-border-header">
+                <button type="button" class="close mt-2" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="p-grid p-justify-center">
+                    <h5 class="modal-title mt-2" id="depositModalLabel">Introduce the amount</h5>
+                    <div class="p-col-7 mt-2">
+                        <input class="form-control" type="number" min="0" max="999.99" step="5" [(ngModel)]="amount">
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <div class="left-side">
+                    <button type="button" class="btn btn-default btn-link" data-dismiss="modal">Cancel</button>
+                </div>
+                <div class="divider"></div>
+                <div class="right-side">
+                    <button type="button" (click)="deposit()" class="btn btn-danger btn-link" data-dismiss="modal">Do
+                        it!
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+::ng-deep body {
+    background-color: #f4f3ef !important;
+}
+
+::ng-deep .ui-dialog .ui-dialog-titlebar {
+    background-color: #34b5b8 !important;
+    color: #ffffff;
+    padding: 1em;
+    font-weight: 700;
+    border-radius: 12px 12px 0 0;
+    border: none !important;
+}
+
+
+::ng-deep .ui-dialog .ui-dialog-content {
+    min-height: 130px !important;
+}
+
+::ng-deep .ui-shadow {
+    box-shadow: none !important;
+}
+
+::ng-deep .ui-chkbox .ui-chkbox-box.ui-state-active {
+    border-color: #51cbce !important;
+    background-color: #51cbce !important;
+    color: #ffffff;
+}
+
+::ng-deep .card-header {
+    background-color: #ffe4c4 !important;
+}

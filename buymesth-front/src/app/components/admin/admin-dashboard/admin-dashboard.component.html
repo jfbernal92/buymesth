@@ -1,0 +1,170 @@
+<div class="row">
+    <p-toast [style]="{marginTop: '80px'}"></p-toast>
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-5 col-md-4">
+                        <div class="icon-big text-center icon-warning">
+                            <i class="nc-icon nc-single-02 text-success"></i>
+                        </div>
+                    </div>
+                    <div class="col-7 col-md-8">
+                        <div class="numbers">
+                            <p class="card-category">Activated Users</p>
+                            <p class="card-title">{{userCount.enabled}}
+                            <p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                    <i class="fa fa-refresh" (click)="getUserCount()" style="cursor: pointer"></i> Last
+                    Update: {{dateCount | date: 'shortTime'}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-5 col-md-4">
+                        <div class="icon-big text-center icon-warning">
+                            <i class="nc-icon nc-lock-circle-open  text-warning"></i>
+                        </div>
+                    </div>
+                    <div class="col-7 col-md-8">
+                        <div class="numbers">
+                            <p class="card-category">Disabled Users</p>
+                            <p class="card-title">{{userCount.disabled}}
+                            <p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                    <i class="fa fa-refresh" (click)="getUserCount()" style="cursor: pointer"></i> Last
+                    Update: {{dateCount | date: 'shortTime'}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-5 col-md-4">
+                        <div class="icon-big text-center icon-warning">
+                            <i class="nc-icon nc-key-25 text-danger"></i>
+                        </div>
+                    </div>
+                    <div class="col-7 col-md-8">
+                        <div class="numbers">
+                            <p class="card-category">Locked Useres</p>
+                            <p class="card-title">{{userCount.locked}}
+                            <p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                    <i class="fa fa-refresh" (click)="getUserCount()" style="cursor: pointer"></i> Last
+                    Update: {{dateCount | date: 'shortTime'}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-5 col-md-4">
+                        <div class="icon-big text-center icon-warning">
+                            <i class="nc-icon nc-world-2 text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="col-7 col-md-8">
+                        <div class="numbers">
+                            <p class="card-category">Registered Users</p>
+                            <p class="card-title">{{userCount.enabled + userCount.disabled}}
+                            <p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                    <i class="fa fa-refresh" (click)="getUserCount()" style="cursor: pointer"></i> Last
+                    Update: {{dateCount | date: 'shortTime'}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card ">
+            <div class="card-header ">
+                <h5 class="card-title">Users Sign up</h5>
+                <p class="card-category">Current Year</p>
+            </div>
+            <div class="card-body ">
+                <p-chart type="line" [data]="userSignup" width="100%" height="300px" [responsive]="true"></p-chart>
+            </div>
+            <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                    <i class="fa fa-refresh" (click)="getUsersBySingup()" style="cursor: pointer"></i> Last
+                    Update: {{dateSignup | date: 'shortTime'}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card ">
+            <div class="card-header ">
+                <h5 class="card-title">Email Statistics</h5>
+                <p class="card-category">All time</p>
+            </div>
+            <div class="card-body ">
+                <p-chart type="doughnut" [data]="userCountry" width="100%" height="350px" [responsive]="true"></p-chart>
+            </div>
+            <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                    <i class="fa fa-refresh" (click)="getUsersByCountry()" style="cursor: pointer"></i> Last
+                    Update: {{dateSignup | date: 'shortTime'}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card card-chart">
+            <div class="card-header">
+                <h5 class="card-title">Buys Statistics</h5>
+                <p class="card-category">All time</p>
+            </div>
+            <div class="card-body">
+                <p-chart type="radar" [data]="preferredCategories" width="100%" height="350px"
+                         [responsive]="true"></p-chart>
+            </div>
+            <div class="card-footer">
+                <hr/>
+                <div class="card-stats">
+                    <i class="fa fa-refresh" (click)="getProductsByCategory()" style="cursor: pointer"></i> Last
+                    Update: {{dateSignup | date: 'shortTime'}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

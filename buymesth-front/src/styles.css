@@ -1,0 +1,174 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    /*background-color: #fff !important;*/
+    -moz-osx-font-smoothing: grayscale !important;
+    -webkit-font-smoothing: antialiased !important;
+    font-weight: 400 !important;
+    /* color: white !important;*/
+}
+
+.overflow-x-hidden {
+    overflow-x: hidden !important;
+}
+
+.overflow-y-hidden {
+    overflow-y: hidden !important;
+}
+
+.overflow-all-hidden {
+    overflow: hidden !important;
+}
+
+.main-panel > .container * {
+    -moz-osx-font-smoothing: grayscale !important;
+    -webkit-font-smoothing: antialiased !important;
+    font-weight: 400 !important;
+}
+
+.main-panel > .container .card {
+    transition: none !important;
+}
+
+.main-panel > .container .card:not(.card-plain):hover {
+    box-shadow: 0px 12px 19px -7px rgba(0, 0, 0, 0.3);
+    transform: none !important;
+    -webkit-transform: none !important;
+    -ms-transform: none !important;
+    -moz-transform: none !important;
+}
+
+.main-panel > .container .card .card-header:first-child {
+    border-radius: 12px 12px 0 0;
+}
+
+
+body .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
+    background-color: #66615B !important;;
+    color: white !important;;
+}
+
+body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item.ui-state-highlight, body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item-group.ui-state-highlight {
+    background-color: #66615B !important;;
+    color: white !important;;
+}
+
+body .ui-paginator {
+    background-color: #ffffff !important;
+    border: none !important;;
+    padding: 0 !important;;
+}
+
+
+@media (min-width: 1200px) {
+    .main-panel > .container {
+        max-width: 1600px;
+    }
+}
+
+.bg-hover {
+    background-color: rgba(0, 0, 0, .075);
+}
+
+.wrapper-main {
+    position: relative;
+    top: 0;
+    margin: 0 auto;
+    padding: 6rem;
+    height: 100%;
+}
+
+.card:not(.card-plain):hover {
+    transform: none;
+    -webkit-transform: none;
+    -ms-transform: none;
+    -moz-transform: none;
+}
+
+.card-header:first-child {
+    border-radius: 12px 12px 0 0;
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand, a, .td-name, td, button, input, select, textarea {
+    font-weight: 400;
+}
+
+.border-default {
+    border-color: #403D39 !important;
+}
+
+.border-primary {
+    border-color: #34b5b8 !important
+}
+
+.border-success {
+    border-color: #44c47d !important
+}
+
+.border-info {
+    border-color: #2ba9cd !important
+}
+
+.border-warning {
+    border-color: #fab526 !important
+}
+
+.border-danger {
+    border-color: #f33816 !important
+}
+
+.bg-default {
+    background-color: #403D39 !important;
+}
+
+.bg-primary {
+    background-color: #34b5b8 !important
+}
+
+.bg-success {
+    background-color: #44c47d !important
+}
+
+.bg-info {
+    background-color: #2ba9cd !important
+}
+
+.bg-warning {
+    background-color: #fab526 !important
+}
+
+.bg-danger {
+    background-color: #f33816 !important
+}
+
+
+.filter::after {
+    background-color: rgba(0, 0, 0, 0.5);
+    content: "";
+    display: block;
+    height: 5000px;
+    left: 0;
+    top: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}
+
+.background-home {
+    position: absolute !important;
+    top: 0 !important;;
+    left: 0 !important;;
+    width: 100% !important;;
+    height: 100% !important;;
+    background: url("./assets/imgs/backgrounds/background-home.png") no-repeat center center fixed !important;;
+    -webkit-background-size: cover !important;;
+    -moz-background-size: cover !important;;
+    -o-background-size: cover !important;;
+    background-size: cover !important;;
+}
+
+@media (max-width: 767px) {
+    body {
+        position: unset !important;
+    }
+
+}

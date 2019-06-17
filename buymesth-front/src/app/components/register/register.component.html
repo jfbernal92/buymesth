@@ -1,0 +1,65 @@
+<div class="wrapper-main mt-4">
+    <p-toast [style]="{marginTop: '80px'}"></p-toast>
+    <div class="p-grid p-justify-center">
+        <div class="p-col-12 p-sm-12 p-md-8 p-lg-6 p-xl-4">
+            <div class="card">
+                <div class="card-header bg-info" style="background-color: #2ba9cd !important">
+                    <h3 class="text-center text-white">Sign Up</h3>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                        <div class="p-grid p-dir-col p-4">
+                            <div class="p-col-12">
+                                <label>Email</label>
+                                <div class="input-group form-group">
+                                    <span class="input-group-addon">
+                                            <i class="nc-icon nc-email-85"></i>
+                                        </span>
+                                    <input type="email" class="form-control" formControlName="email" name="email" placeholder="Introduce your email">
+                                </div>
+                                <div *ngIf="submitted && form.controls.email.invalid">
+                                    <div *ngIf="form.controls.email.errors.required" class="text-danger">Email is required
+                                    </div>
+                                    <div *ngIf="form.controls.email.errors.email" class="text-danger">Email must be a valid email address
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-col-12">
+                                <label>Password</label>
+                                <div class="input-group form-group">
+                                    <span class="input-group-addon">
+                                            <i class="nc-icon nc-key-25"></i>
+                                        </span>
+                                    <input type="password" class="form-control" formControlName="password" placeholder="Password">
+                                </div>
+                                <div *ngIf="submitted && form.controls.password.invalid">
+                                    <div *ngIf="form.controls.password.errors.required" class="text-danger">Password is required
+                                    </div>
+                                    <div *ngIf="form.controls.password.errors" class="text-danger">Password min length: 6
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-col-align-center">
+                                <div class="update ml-auto mr-auto mt-2">
+                                    <button class="btn btn-outline-info btn-round btn-lg" type="submit">Sign Up
+                                        <p-progressSpinner *ngIf="form.valid && spinner" class="ml-3"
+                                                           [style]="{width: '12px', height: '12px'}"
+                                                           strokeWidth="9" animationDuration="5s"></p-progressSpinner>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="p-grid p-justify-center">
+        <div class="p-col-12 p-sm-12 p-md-8 p-lg-6 p-xl-4" style="z-index: 100">
+            <hr/>
+            <p>Already have an account?</p>
+            <button routerLink="/login" class="btn btn-round btn-info">Log In into your account</button>
+        </div>
+    </div>
+</div>
