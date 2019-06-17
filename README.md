@@ -31,6 +31,9 @@ Una vez definidos los endpoints, se continuó desarrollando el front-end como el
 
 ## Demostración
 
-[BACK-END](https://buymesth-back.herokuapp.com/swagger-ui.html)
+#### Cuenta administración: 
+user: admin@buymesth.com
+password: 123456
 
+[BACK-END](https://buymesth-back.herokuapp.com/swagger-ui.html)
 [FRONT-END](https://buymesth.herokuapp.com)
